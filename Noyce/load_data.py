@@ -12,9 +12,9 @@ REDDIT_COMMENTS_POL = "./UCD_Noyce/Noyce/data/ideology/reddit_political_comments
 def load_pol_v1():
 
     df = pd.read_csv(
-        "./data/POLITICAL/v1/political_train.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/POLITICAL/v1/political_train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
-        "./data/POLITICAL/v1/political_test.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/POLITICAL/v1/political_test.csv", encoding='unicode_escape')
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
@@ -22,9 +22,9 @@ def load_pol_v1():
 def load_pol_v2():
 
     df = pd.read_csv(
-        "./data/POLITICAL/v2/political_train.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/POLITICAL/v2/political_train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
-        "./data/POLITICAL/v2/political_test.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/POLITICAL/v2/political_test.csv", encoding='unicode_escape')
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
@@ -32,9 +32,9 @@ def load_pol_v2():
 def load_pol_v3():
 
     df = pd.read_csv(
-        "./data/POLITICAL/v3/political_train.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/POLITICAL/v3/political_train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
-        "./data/POLITICAL/v3/political_test.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/POLITICAL/v3/political_test.csv", encoding='unicode_escape')
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
