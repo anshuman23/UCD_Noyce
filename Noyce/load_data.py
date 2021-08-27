@@ -8,6 +8,38 @@ YOUTUBE_POSTS = "./UCD_Noyce/Noyce/data/ideology/youtube.csv"
 REDDIT_COMMENTS = "./UCD_Noyce/Noyce/data/ideology/reddit_comments_onesided.csv"
 REDDIT_COMMENTS_POL = "./UCD_Noyce/Noyce/data/ideology/reddit_political_comments_85.csv"
 
+
+def load_pol_v1():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/POLITICAL/v1/political_train.csv", encoding='unicode_escape')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/POLITICAL/v2/political_test.csv", encoding='unicode_escape')
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
+
+def load_pol_v2():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/POLITICAL/v2/political_train.csv", encoding='unicode_escape')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/POLITICAL/v2/political_test.csv", encoding='unicode_escape')
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
+
+def load_pol_v3():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/POLITICAL/v3/political_train.csv", encoding='unicode_escape')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/POLITICAL/v3/political_test.csv", encoding='unicode_escape')
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
+
+
 def load_new_ideo_data():
 
     df = pd.read_csv(
@@ -123,7 +155,13 @@ def load_disagreement_data():
     return df_train['text'].tolist(), df_train['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
 
 
-def load_data(dset_name='political_text', path = '', test_set = True):
+def load_data(dset_name='political_v3', path = '', test_set = True):
+    if dset_name == 'political_v1':
+        return load_pol_v1()
+    if dset_name == 'political_v2':
+        return load_pol_v2()
+    if dset_name == 'political_v3':
+        return load_pol_v3()
     if dset_name == 'political_text':
         return load_pol_data()
     if dset_name == 'ideology':
