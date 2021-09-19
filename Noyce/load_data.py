@@ -13,7 +13,7 @@ def load_ideo_speech():
     df = pd.read_csv(
         "./UCD_Noyce/Noyce/data/anshuman_ideology/ideology_train_speech.csv", encoding='utf-8')
     df_test = pd.read_csv(
-        "./UCD_Noyce/Noyce/data/anshuman_ideology/ideology_validation.csv", encoding='utf-8')
+        "./UCD_Noyce/Noyce/data/anshuman_ideology/ideology_test.csv", encoding='utf-8')
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
