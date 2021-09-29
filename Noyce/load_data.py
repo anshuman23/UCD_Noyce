@@ -14,6 +14,7 @@ def load_ideo_final():
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/test.csv", encoding='unicode_escape')
+    df = df.dropna()
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
