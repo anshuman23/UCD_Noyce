@@ -11,7 +11,7 @@ REDDIT_COMMENTS_POL = "./UCD_Noyce/Noyce/data/ideology/reddit_political_comments
 def load_ideo_final():
 
     df = pd.read_csv(
-        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/train.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/ideology/ideology_train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/test.csv", encoding='unicode_escape')
     df['text'] = df['text'].apply(normalize)
