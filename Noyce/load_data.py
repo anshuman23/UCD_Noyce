@@ -8,6 +8,16 @@ YOUTUBE_POSTS = "./UCD_Noyce/Noyce/data/ideology/youtube.csv"
 REDDIT_COMMENTS = "./UCD_Noyce/Noyce/data/ideology/reddit_comments_onesided.csv"
 REDDIT_COMMENTS_POL = "./UCD_Noyce/Noyce/data/ideology/reddit_political_comments_85.csv"
 
+def load_ideo_final():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/train.csv", encoding='utf-8')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/test.csv", encoding='utf-8')
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].tolist(), df_test['text'].tolist(), df_test['class_id'].tolist()
+
 def load_ideo_speech():
 
     df = pd.read_csv(
@@ -188,6 +198,8 @@ def load_disagreement_data():
 
 
 def load_data(dset_name='political_final', path = '', test_set = True):
+    if dset_name == 'ideology_final':
+        return load_ideo_final()
     if dset_name == 'ideology_v1':
         return load_ideo_v1()
     if dset_name == 'ideology_speech':
