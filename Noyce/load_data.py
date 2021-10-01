@@ -22,10 +22,14 @@ def load_ideo_final():
 def load_ideo_addn_bin():
 
     df = pd.read_csv(
-        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_bin.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
-        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_bin.csv", encoding='unicode_escape')
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/test.csv", encoding='unicode_escape')
     df = df.dropna()
+    
+    df = df.loc[df['class_id'] != 2]
+    df_test = df_test.loc[df_test['class_id'] != 2]
+    
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
