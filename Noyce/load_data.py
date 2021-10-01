@@ -19,6 +19,41 @@ def load_ideo_final():
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
 
+def load_ideo_addn_bin():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_bin.csv", encoding='unicode_escape')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_bin.csv", encoding='unicode_escape')
+    df = df.dropna()
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
+
+def load_ideo_addn_ninety():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_ninety.csv", encoding='unicode_escape')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_ten.csv", encoding='unicode_escape')
+    df = df.dropna()
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
+
+
+def load_ideo_addn_old():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_with_old.csv", encoding='unicode_escape')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_with_old.csv", encoding='unicode_escape')
+    df = df.dropna()
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
+
+
 def load_ideo_speech():
 
     df = pd.read_csv(
@@ -201,6 +236,12 @@ def load_disagreement_data():
 def load_data(dset_name='political_final', path = '', test_set = True):
     if dset_name == 'ideology_final':
         return load_ideo_final()
+    if dset_name == 'ideology_addn_bin':
+        return load_ideo_addn_bin()
+    if dset_name == 'ideology_addn_ninety':
+        return load_ideo_addn_ninety()
+    if dset_name == 'ideology_addn_old':
+        return load_ideo_addn_old()
     if dset_name == 'ideology_v1':
         return load_ideo_v1()
     if dset_name == 'ideology_speech':
