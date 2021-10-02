@@ -14,7 +14,12 @@ def load_ideo_final():
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/test.csv", encoding='unicode_escape')
+    
     df = df.dropna()
+    df_test = df_test.dropna()
+    df = df.sample(frac=1)
+    df_test = df_test.sample(frac=1)
+    
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
@@ -25,6 +30,7 @@ def load_ideo_addn_bin():
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/train.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/combined/test.csv", encoding='unicode_escape')
+    
     df = df.dropna()
     
     df = df.loc[df['class_id'] != 2]
@@ -40,7 +46,9 @@ def load_ideo_addn_ninety():
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_ninety.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_ten.csv", encoding='unicode_escape')
+    
     df = df.dropna()
+    
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
@@ -52,7 +60,9 @@ def load_ideo_addn_old():
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_with_old.csv", encoding='unicode_escape')
     df_test = pd.read_csv(
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_with_old.csv", encoding='unicode_escape')
+    
     df = df.dropna()
+    
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
