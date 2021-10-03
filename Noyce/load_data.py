@@ -17,6 +17,7 @@ def load_ideo_addn_newold():
         "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_old.csv", encoding='unicode_escape')
     
     df = df.dropna()
+    df_test = df_test.dropna()
     
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
