@@ -69,6 +69,9 @@ def load_ideo_addn_newold():
     df = df.loc[df['class_id'] != 2]
     df_test = df_test.loc[df_test['class_id'] != 2]
     
+    df = df.sample(frac=1)
+    df_test = df_test.sample(frac=1)
+    
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
     return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
