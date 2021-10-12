@@ -8,6 +8,23 @@ YOUTUBE_POSTS = "./UCD_Noyce/Noyce/data/ideology/youtube.csv"
 REDDIT_COMMENTS = "./UCD_Noyce/Noyce/data/ideology/reddit_comments_onesided.csv"
 REDDIT_COMMENTS_POL = "./UCD_Noyce/Noyce/data/ideology/reddit_political_comments_85.csv"
 
+def load_ideo_addn_yt_slant_combined2():
+
+    df1 = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_yt_slant_cleaned.csv", encoding='unicode_escape').dropna()
+    df2 = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_new.csv", encoding='unicode_escape').dropna()
+    
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_old.csv", encoding='unicode_escape').dropna()
+    
+    df = pd.concat([df1, df2], join='outer', ignore_index=False)
+    df_test = df_test.loc[df_test['class_id'] != 2]
+    
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
+
 
 def load_ideo_addn_yt_slant_only():
 
@@ -349,6 +366,8 @@ def load_disagreement_data():
 
 
 def load_data(dset_name='political_final', path = '', test_set = True):
+    if dset_name == 'ideology_addn_yt_slant_combined2':
+        return load_ideo_addn_yt_slant_combined2()
     if dset_name == 'ideology_addn_yt_slant_only':
         return load_ideo_addn_yt_slant_only()
     if dset_name == 'ideology_addn_yt_slant_combined':
