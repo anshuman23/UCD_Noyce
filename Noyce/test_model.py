@@ -20,7 +20,7 @@ if __name__ == '__main__':
   args = parser.parse_args()
   model = Model(path = args.modelpath).to(device)
   tokenizer = Tokenizer(path = args.modelpath)
-  df = pd.read_csv(args.datapath)
+  df = pd.read_csv(args.datapath).dropna()
   df['text'] = df['text'].apply(normalize)
   x = df['text'].tolist()
 
