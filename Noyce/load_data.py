@@ -401,7 +401,7 @@ def load_disagreement_data():
 
 def load_data(dset_name='political_final', path = '', test_set = True):
     if dset_name == 'ideology_addn_yt_slant_pol2':
-        return load_ideo_addn_yt_slant_pol()
+        return load_ideo_addn_yt_slant_pol2()
     if dset_name == 'ideology_addn_yt_slant_pol':
         return load_ideo_addn_yt_slant_pol()
     if dset_name == 'ideology_addn_yt_slant_combined2':
