@@ -8,6 +8,21 @@ YOUTUBE_POSTS = "./UCD_Noyce/Noyce/data/ideology/youtube.csv"
 REDDIT_COMMENTS = "./UCD_Noyce/Noyce/data/ideology/reddit_comments_onesided.csv"
 REDDIT_COMMENTS_POL = "./UCD_Noyce/Noyce/data/ideology/reddit_political_comments_85.csv"
 
+def load_filterer():
+
+    df = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/FILTERER/train.csv", encoding='unicode_escape')
+    df_test = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/FILTERER/test.csv", encoding='unicode_escape')
+    
+    df = df.dropna()
+    df_test = df_test.dropna()
+    
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
+
+
 def load_ideo_FIN():
 
     df = pd.read_csv(
@@ -414,6 +429,8 @@ def load_disagreement_data():
 
 
 def load_data(dset_name='political_final', path = '', test_set = True):
+    if dset_name == 'filterer':
+        return load_filterer()
     if dset_name == 'ideology_FIN':
         return load_ideo_FIN()
     if dset_name == 'ideology_addn_yt_slant_pol2':
