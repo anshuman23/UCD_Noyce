@@ -8,6 +8,21 @@ YOUTUBE_POSTS = "./UCD_Noyce/Noyce/data/ideology/youtube.csv"
 REDDIT_COMMENTS = "./UCD_Noyce/Noyce/data/ideology/reddit_comments_onesided.csv"
 REDDIT_COMMENTS_POL = "./UCD_Noyce/Noyce/data/ideology/reddit_political_comments_85.csv"
 
+def load_org():
+
+    df1 = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/train_new.csv", encoding='unicode_escape').dropna()
+    df2 = pd.read_csv(
+        "./UCD_Noyce/Noyce/data/IDEOLOGICAL/additionals/test_old.csv", encoding='unicode_escape').dropna()
+    
+    df3 = pd.concat([df1, df2], join='outer', ignore_index=False)
+    df3 = df3.sample(frac=1).reset_index(drop=True)
+    df, df_test = train_test_split(df3, shuffle=True, random_state=42)
+
+    df['text'] = df['text'].apply(normalize)
+    df_test['text'] = df_test['text'].apply(normalize)
+    return df['text'].tolist(), df['class_id'].astype(int).tolist(), df_test['text'].tolist(), df_test['class_id'].astype(int).tolist()
+
 
 def load_org_article():
 
@@ -491,6 +506,8 @@ def load_disagreement_data():
 
 
 def load_data(dset_name='political_final', path = '', test_set = True):
+    if dset_name == 'ideology_org':
+        return load_org()
     if dset_name == 'ideology_org_article':
         return load_org_article()
     if dset_name == 'ideology_article_filter':
