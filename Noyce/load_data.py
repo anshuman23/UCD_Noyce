@@ -17,7 +17,7 @@ def load_org():
     
     df3 = pd.concat([df1, df2], join='outer', ignore_index=False)
     df3 = df3.sample(frac=1).reset_index(drop=True)
-    df, df_test = train_test_split(df3, shuffle=True, random_state=42)
+    df, df_test = train_test_split(df3, shuffle=True, random_state=42, test_size=0.2)
 
     df['text'] = df['text'].apply(normalize)
     df_test['text'] = df_test['text'].apply(normalize)
