@@ -16,7 +16,7 @@ def ideology_combined_final():
         "./UCD_Noyce/Noyce/data/explicit_subreddits_annotated.csv", encoding='unicode_escape').dropna()
     
     df = pd.concat([df1, df2], join='outer', ignore_index=False)
-    df = df.sample(frac=1).reset_index(drop=True)
+    #df = df.sample(frac=1).reset_index(drop=True)
     df_test = pd.read_csv("./UCD_Noyce/Noyce/data/test_combined.csv", encoding='unicode_escape').dropna()
 
     df['text'] = df['text'].apply(normalize)
